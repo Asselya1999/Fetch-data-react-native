@@ -1,61 +1,53 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';  
-import SearchMovies from './screens/SearchMovies'
-import MovieDetails from './screens/MovieDetails'
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import BottomTabNavigator from "./TabNavigator";
-import Home from "./screens/Home";
-import About from "./screens/About";
-import Contact from "./screens/Contact";
-import Splash from "./screens/Splash";
+import "react-native-gesture-handler";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import SearchMovies from "./screens/SearchMovies";
+import MovieDetails from "./screens/MovieDetails";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { HomeStackNavigator, ContactStackNavigator } from "./StackNavigator";
+import { Image } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator();
 
-const screenOptionStyle = {
-  headerStyle: {
-    backgroundColor: "#9AC4F8",
-  },
-  headerTintColor: "white",
-  headerBackTitle: "Back",
-}; 
-
-const HomeStackNavigator = () => {
+const BottomTabNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={Home} options={{headerLeft: (props) => null }}  />
-      <Stack.Screen name="About" component={About} />
-    </Stack.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeStackNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/icons/home-outline-svg.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Contact"
+        component={ContactStackNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/icons/people-outline-svg.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
-}
-
-const ContactStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Contact" component={Contact} options={{ headerLeft: (props) => null }} />
-    </Stack.Navigator>
-  );
-}
+};
 
 export default class App extends React.Component {
- 
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name = "SearchMovies" 
-          component = {SearchMovies} 
-          options={{ title: 'Movie Browser' }} />
-          <Stack.Screen name = "MovieDetails" 
-          component = {MovieDetails} 
-          options={{ title: 'Movie Details' }} />
-          <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
-        </ Stack.Navigator>
-      </ NavigationContainer>
+        <BottomTabNavigator />
+      </NavigationContainer>
     );
   }
 }
-
-export { HomeStackNavigator, ContactStackNavigator };

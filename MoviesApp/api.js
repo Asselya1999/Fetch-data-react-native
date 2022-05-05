@@ -13,3 +13,4 @@ export const fetchMoviesById = async (id) => {
 	const results = await response.json()
 	return results
 } 
+

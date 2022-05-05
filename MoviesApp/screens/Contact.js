@@ -1,10 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 
 const Contact = () => {
   return (
     <View style={styles.center}>
-      <Text>This is the contact screen</Text>
+    <Image source={{uri: 'https://www.kinopark.kz/static/img/photos/fallback.png'}}
+       style={{width: 400, height: 400}} />
+      <Text>This is the contact screen
+      ТЦ Esentai Mall, Аль-Фараби проспект, 77/8, г. Алматы, Казахстан, 050000
+      </Text>
     </View>
   );
 };

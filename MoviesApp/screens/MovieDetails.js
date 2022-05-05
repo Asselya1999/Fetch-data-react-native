@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import {fetchMoviesById} from '../api'
 
 export default class MovieDetails extends React.Component {
@@ -28,32 +28,34 @@ export default class MovieDetails extends React.Component {
  
   render() {
     return (
-      <View style={styles.container}>
-        <View >
-          {this.state.info && this.state.info.Poster ? (
-            <Image
-              resizeMode="cover"
-              source={{ uri: this.state.info.Poster }}
-              style={styles.image}
-            />
-          ) : null}
-        </View>
-        <View>
-          {this.state.info && (
-            <View>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={styles.title}>{this.state.info.Title} </Text>
-                <Text style={{ padding: 5}}> ({this.state.info.Year})</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <View >
+            {this.state.info && this.state.info.Poster ? (
+              <Image
+                resizeMode="cover"
+                source={{ uri: this.state.info.Poster }}
+                style={styles.image}
+              />
+            ) : null}
+          </View>
+          <View>
+            {this.state.info && (
+              <View>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.title}>{this.state.info.Title} </Text>
+                  <Text style={{ padding: 5}}> ({this.state.info.Year})</Text>
+                </View>
+                <Text style={{fontStyle: 'italic'}}>{this.state.info.Rated} , {this.state.info.Runtime} </Text>
+                <Text style={styles.plot}>{this.state.info.Plot}</Text>
+                <Text>IMDB Rating: ({this.state.info.imdbRating}/10)</Text>
+                <Text style={styles.actors}>Cast: {this.state.info.Actors}</Text>
+                <Text>Genre: {this.state.info.Genre}</Text>
               </View>
-              <Text style={{fontStyle: 'italic'}}>{this.state.info.Rated} , {this.state.info.Runtime} </Text>
-              <Text style={styles.plot}>{this.state.info.Plot}</Text>
-              <Text>IMDB Rating: ({this.state.info.imdbRating}/10)</Text>
-              <Text style={styles.actors}>Cast: {this.state.info.Actors}</Text>
-              <Text>Genre: {this.state.info.Genre}</Text>
-            </View>
-          )}
+            )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

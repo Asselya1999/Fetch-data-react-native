@@ -5,7 +5,7 @@ const Splash = ({ navigation }) => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate("TabNavigator")
+            navigation.navigate("App")
         }, 2000);
     }, []);
 
